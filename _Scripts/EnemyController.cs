@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+
 [System.Serializable]
 public class Speed {
 	public float minSpeed, maxSpeed;
@@ -72,4 +74,6 @@ public class EnemyController : MonoBehaviour
         }
 
     }
+
+    
 }

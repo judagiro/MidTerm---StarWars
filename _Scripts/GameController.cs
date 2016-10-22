@@ -2,6 +2,7 @@
 using System.Collections;
 
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 	// PUBLIC INSTANCE VARIABLES
@@ -13,9 +14,14 @@ public class GameController : MonoBehaviour {
     [Header("UI Objects")]
     public Text HullLabel;
     public Text ScoreLabel;
+    public Text FinalScoreLabel;
+    public Text GameOverLabel;
+    public Button RestartButton;
+
+    [Header("Game Objects")]
+    public GameObject player;
 
 
-    
 
     public int HullValue
     {
@@ -56,6 +62,9 @@ public class GameController : MonoBehaviour {
     void Start () {
         this.HullValue = 5;
         this.ScoreValue = 0;
+        this.GameOverLabel.gameObject.SetActive(false);
+        this.FinalScoreLabel.gameObject.SetActive(false);
+        this.RestartButton.gameObject.SetActive(false);
         this._GenerateEnemies ();
 
 	}
@@ -74,13 +83,19 @@ public class GameController : MonoBehaviour {
 
     private void _endGame()
     {
-        //this.GameOverLabel.gameObject.SetActive(true);
-        this.ScoreLabel.text = "Final Score: " + this.ScoreValue;
-        this.ScoreLabel.gameObject.SetActive(true);
-        //this.RestartButton.gameObject.SetActive(true);
+        this.GameOverLabel.gameObject.SetActive(true);
+        this.FinalScoreLabel.text = "Final Score: " + this.ScoreValue;
+        this.FinalScoreLabel.gameObject.SetActive(true);
+        this.RestartButton.gameObject.SetActive(true);
         this.ScoreLabel.gameObject.SetActive(false);
         this.HullLabel.gameObject.SetActive(false);
-        
-        
+        this.player.SetActive(false);
+
+
+    }
+
+    public void RestartButton_Click()
+    {
+        SceneManager.LoadScene("Main");
     }
 }
